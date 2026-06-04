@@ -1,0 +1,6 @@
+"EmployeeID","UserName","FirstName","LastName","Department","JobTitle","Manager","Action","Status","Groups"
+"1001","mtremblay","Marie","Tremblay","Nursing","Nurse","Claire Dubois","Joiner","Active","GRP_NURSES;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL"
+"1002","jdupont","Jean","Dupont","IT","IAM Analyst","Marc Fortin","Joiner","Active","GRP_IT_IAM;GRP_EMAIL_BASIC;GRP_ADMIN_TOOLS"
+"1003","abah","Amina","Bah","Laboratory","Lab Technician","Sophie Martin","Joiner","Active","GRP_LAB;GRP_EMAIL_BASIC;GRP_LAB_SYSTEM"
+"1004","pnguyen","Paul","Nguyen","Nursing","Head Nurse","Claire Dubois","Mover","Active - Updated Role","GRP_NURSES;GRP_NURSE_SUPERVISORS;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL"
+"1005","dsmith","David","Smith","Finance","Accountant","Nathalie Roy","Leaver","Disabled","Removed"

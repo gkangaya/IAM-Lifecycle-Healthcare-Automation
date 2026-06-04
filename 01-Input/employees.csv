@@ -1,0 +1,6 @@
+EmployeeID,FirstName,LastName,Department,JobTitle,Manager,Action,StartDate,EndDate
+1001,Marie,Tremblay,Nursing,Nurse,Claire Dubois,Joiner,2026-06-10,
+1002,Jean,Dupont,IT,IAM Analyst,Marc Fortin,Joiner,2026-06-10,
+1003,Amina,Bah,Laboratory,Lab Technician,Sophie Martin,Joiner,2026-06-10,
+1004,Paul,Nguyen,Nursing,Head Nurse,Claire Dubois,Mover,2026-06-10,
+1005,David,Smith,Finance,Accountant,Nathalie Roy,Leaver,2025-01-15,2026-06-10

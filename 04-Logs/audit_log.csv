@@ -1,0 +1,6 @@
+"DateTime","EmployeeID","UserName","Action","Status","Details"
+"2026-06-04 18:15:40","1001","mtremblay","Joiner","Active","Account created and groups assigned"
+"2026-06-04 18:15:40","1002","jdupont","Joiner","Active","Account created and groups assigned"
+"2026-06-04 18:15:40","1003","abah","Joiner","Active","Account created and groups assigned"
+"2026-06-04 18:15:40","1004","pnguyen","Mover","Active - Updated Role","Role updated and access modified"
+"2026-06-04 18:15:40","1005","dsmith","Leaver","Disabled","Account disabled and groups removed"
