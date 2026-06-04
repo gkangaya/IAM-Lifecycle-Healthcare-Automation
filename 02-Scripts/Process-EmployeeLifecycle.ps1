@@ -1,18 +1,12 @@
 # Healthcare IAM Lifecycle Automation
-# Version 2.0 - Simulated account creation + audit log
+# Version 4.0 - RBAC with external role mapping
 
 $ProjectRoot = "C:\Projects\IAM-Lifecycle-Healthcare-Automation"
-$InputFile   = "$ProjectRoot\01-Input\employees.csv"
-$DataFile    = "$ProjectRoot\03-Data\simulated_users.csv"
-$LogFile     = "$ProjectRoot\04-Logs\audit_log.csv"
 
-$RoleGroups = @{
-    "Nurse"          = "GRP_NURSES;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL"
-    "Head Nurse"    = "GRP_NURSES;GRP_NURSE_SUPERVISORS;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL"
-    "IAM Analyst"   = "GRP_IT_IAM;GRP_EMAIL_BASIC;GRP_ADMIN_TOOLS"
-    "Lab Technician"= "GRP_LAB;GRP_EMAIL_BASIC;GRP_LAB_SYSTEM"
-    "Accountant"    = "GRP_FINANCE;GRP_EMAIL_BASIC;GRP_FINANCE_SYSTEM"
-}
+$InputFile       = "$ProjectRoot\01-Input\employees.csv"
+$RoleMappingFile = "$ProjectRoot\03-Data\RoleMappings.csv"
+$DataFile        = "$ProjectRoot\03-Data\simulated_users.csv"
+$LogFile         = "$ProjectRoot\04-Logs\audit_log.csv"
 
 function New-UserName {
     param($FirstName, $LastName)
@@ -33,23 +27,47 @@ function Write-AuditLog {
 }
 
 $Employees = Import-Csv $InputFile
+$RoleMappings = Import-Csv $RoleMappingFile
+
 $SimulatedUsers = @()
 
 foreach ($Employee in $Employees) {
 
     $UserName = New-UserName -FirstName $Employee.FirstName -LastName $Employee.LastName
-    $Groups = $RoleGroups[$Employee.JobTitle]
+
+    $RoleMatch = $RoleMappings | Where-Object {
+        $_.JobTitle -eq $Employee.JobTitle
+    }
+
+    if ($RoleMatch) {
+        $Groups = $RoleMatch.Groups
+    }
+    else {
+        $Groups = "NO_GROUP_MAPPING_FOUND"
+    }
 
     switch ($Employee.Action) {
 
         "Joiner" {
-            $Status = "Active"
-            $Details = "Account created and groups assigned"
+            if ($Groups -eq "NO_GROUP_MAPPING_FOUND") {
+                $Status = "Error"
+                $Details = "No RBAC mapping found for job title: $($Employee.JobTitle)"
+            }
+            else {
+                $Status = "Active"
+                $Details = "Account created and groups assigned from RBAC mapping"
+            }
         }
 
         "Mover" {
-            $Status = "Active - Updated Role"
-            $Details = "Role updated and access modified"
+            if ($Groups -eq "NO_GROUP_MAPPING_FOUND") {
+                $Status = "Error"
+                $Details = "No RBAC mapping found for new job title: $($Employee.JobTitle)"
+            }
+            else {
+                $Status = "Active - Updated Role"
+                $Details = "Role updated and access modified from RBAC mapping"
+            }
         }
 
         "Leaver" {
@@ -90,5 +108,6 @@ foreach ($Employee in $Employees) {
 $SimulatedUsers | Export-Csv -Path $DataFile -NoTypeInformation
 
 Write-Host "Processing completed successfully."
-Write-Host "Generated users file: $DataFile"
-Write-Host "Generated audit log : $LogFile"
+Write-Host "RBAC mapping file : $RoleMappingFile"
+Write-Host "Generated users   : $DataFile"
+Write-Host "Generated audit   : $LogFile"
