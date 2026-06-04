@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>Healthcare IAM Lifecycle Report</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 30px;
+}
+
+h1 {
+    color: darkblue;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #1f4e79;
+    color: white;
+    padding: 8px;
+}
+
+td {
+    border: 1px solid #cccccc;
+    padding: 8px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Healthcare IAM Lifecycle Report</h1>
+
+<p><b>Execution Date:</b> 06/04/2026 19:13:50</p>
+
+<h2>Summary</h2>
+
+<ul>
+<li>Joiners : 3</li>
+<li>Movers : 1</li>
+<li>Leavers : 1</li>
+</ul>
+
+<h2>Employee Lifecycle Details</h2>
+
+<table> <colgroup><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/></colgroup> <tr><th>EmployeeID</th><th>UserName</th><th>FirstName</th><th>LastName</th><th>Department</th><th>JobTitle</th><th>Manager</th><th>Action</th><th>Status</th><th>Groups</th></tr> <tr><td>1001</td><td>mtremblay</td><td>Marie</td><td>Tremblay</td><td>Nursing</td><td>Nurse</td><td>Claire Dubois</td><td>Joiner</td><td>Active</td><td>GRP_NURSES;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td></tr> <tr><td>1002</td><td>jdupont</td><td>Jean</td><td>Dupont</td><td>IT</td><td>IAM Analyst</td><td>Marc Fortin</td><td>Joiner</td><td>Active</td><td>GRP_IT_IAM;GRP_EMAIL_BASIC;GRP_ADMIN_TOOLS</td></tr> <tr><td>1003</td><td>abah</td><td>Amina</td><td>Bah</td><td>Laboratory</td><td>Lab Technician</td><td>Sophie Martin</td><td>Joiner</td><td>Active</td><td>GRP_LAB;GRP_EMAIL_BASIC;GRP_LAB_SYSTEM</td></tr> <tr><td>1004</td><td>pnguyen</td><td>Paul</td><td>Nguyen</td><td>Nursing</td><td>Head Nurse</td><td>Claire Dubois</td><td>Mover</td><td>Active - Updated Role</td><td>GRP_NURSES;GRP_NURSE_SUPERVISORS;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td></tr> <tr><td>1005</td><td>dsmith</td><td>David</td><td>Smith</td><td>Finance</td><td>Accountant</td><td>Nathalie Roy</td><td>Leaver</td><td>Disabled</td><td>Removed</td></tr> </table>
+
+</body>
+</html>
