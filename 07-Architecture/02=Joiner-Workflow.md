@@ -12,4 +12,4 @@ flowchart TD
     H --> I[Assign Security Groups]
     I --> J[Write Audit Log]
     J --> K[Generate HTML Report]
-    
+```
