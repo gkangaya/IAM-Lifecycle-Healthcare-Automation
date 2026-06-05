@@ -4,3 +4,7 @@ EmployeeID,FirstName,LastName,Department,JobTitle,Manager,Action,StartDate,EndDa
 1003,Amina,Bah,Laboratory,Lab Technician,Sophie Martin,Joiner,2026-06-10,
 1004,Paul,Nguyen,Nursing,Head Nurse,Claire Dubois,Mover,2026-06-10,
 1005,David,Smith,Finance,Accountant,Nathalie Roy,Leaver,2025-01-15,2026-06-10
+1006,Sarah,Mensah,Radiology,Radiology Technician,Claire Dubois,Joiner,2026-06-10,
+1007,John,Doe,IT,IAM Analyst,,Joiner,2026-06-10,
+1008,Jane,Doe,,Nurse,Claire Dubois,Joiner,2026-06-10,
+1009,Alex,,IT,IAM Analyst,Marc Fortin,Joiner,2026-06-10,

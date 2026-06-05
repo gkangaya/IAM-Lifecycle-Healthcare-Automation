@@ -33,6 +33,70 @@ $SimulatedUsers = @()
 
 foreach ($Employee in $Employees) {
 
+    # Governance Validation
+
+$ValidationErrors = @()
+
+if ([string]::IsNullOrWhiteSpace($Employee.FirstName)) {
+    $ValidationErrors += "Missing FirstName"
+}
+
+if ([string]::IsNullOrWhiteSpace($Employee.LastName)) {
+    $ValidationErrors += "Missing LastName"
+}
+
+if ([string]::IsNullOrWhiteSpace($Employee.Department)) {
+    $ValidationErrors += "Missing Department"
+}
+
+if ([string]::IsNullOrWhiteSpace($Employee.Manager)) {
+    $ValidationErrors += "Missing Manager"
+}
+
+if ([string]::IsNullOrWhiteSpace($Employee.JobTitle)) {
+    $ValidationErrors += "Missing JobTitle"
+}
+
+if (
+    $Employee.Action -eq "Joiner" -and
+    [string]::IsNullOrWhiteSpace($Employee.StartDate)
+)
+{
+    $ValidationErrors += "Missing StartDate"
+}
+
+if ($ValidationErrors.Count -gt 0)
+{
+    $Status = "Validation Error"
+
+    $Details = $ValidationErrors -join "; "
+
+    $User = [PSCustomObject]@{
+        EmployeeID = $Employee.EmployeeID
+        UserName   = "N/A"
+        FirstName  = $Employee.FirstName
+        LastName   = $Employee.LastName
+        Department = $Employee.Department
+        JobTitle   = $Employee.JobTitle
+        Manager    = $Employee.Manager
+        Action     = $Employee.Action
+        Status     = $Status
+        Groups     = "N/A"
+        ValidationMessage = $Details
+    }
+
+    $SimulatedUsers += $User
+
+    Write-AuditLog `
+        -EmployeeID $Employee.EmployeeID `
+        -UserName "N/A" `
+        -Action $Employee.Action `
+        -Status $Status `
+        -Details $Details
+
+    continue
+}
+
     $UserName = New-UserName -FirstName $Employee.FirstName -LastName $Employee.LastName
 
     $RoleMatch = $RoleMappings | Where-Object {
@@ -93,6 +157,7 @@ foreach ($Employee in $Employees) {
         Action     = $Employee.Action
         Status     = $Status
         Groups     = $Groups
+        ValidationMessage = $Details
     }
 
     $SimulatedUsers += $User

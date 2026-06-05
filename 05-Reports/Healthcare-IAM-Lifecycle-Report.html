@@ -35,19 +35,19 @@ td {
 
 <h1>Healthcare IAM Lifecycle Report</h1>
 
-<p><b>Execution Date:</b> 06/04/2026 19:33:35</p>
+<p><b>Execution Date:</b> 06/04/2026 20:07:14</p>
 
 <h2>Summary</h2>
 
 <ul>
-<li>Joiners : 3</li>
+<li>Joiners : 7</li>
 <li>Movers : 1</li>
 <li>Leavers : 1</li>
 </ul>
 
 <h2>Employee Lifecycle Details</h2>
 
-<table> <colgroup><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/></colgroup> <tr><th>EmployeeID</th><th>UserName</th><th>FirstName</th><th>LastName</th><th>Department</th><th>JobTitle</th><th>Manager</th><th>Action</th><th>Status</th><th>Groups</th></tr> <tr><td>1001</td><td>mtremblay</td><td>Marie</td><td>Tremblay</td><td>Nursing</td><td>Nurse</td><td>Claire Dubois</td><td>Joiner</td><td>Active</td><td>GRP_NURSES;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td></tr> <tr><td>1002</td><td>jdupont</td><td>Jean</td><td>Dupont</td><td>IT</td><td>IAM Analyst</td><td>Marc Fortin</td><td>Joiner</td><td>Active</td><td>GRP_IT_IAM;GRP_EMAIL_BASIC;GRP_ADMIN_TOOLS</td></tr> <tr><td>1003</td><td>abah</td><td>Amina</td><td>Bah</td><td>Laboratory</td><td>Lab Technician</td><td>Sophie Martin</td><td>Joiner</td><td>Active</td><td>GRP_LAB;GRP_EMAIL_BASIC;GRP_LAB_SYSTEM</td></tr> <tr><td>1004</td><td>pnguyen</td><td>Paul</td><td>Nguyen</td><td>Nursing</td><td>Head Nurse</td><td>Claire Dubois</td><td>Mover</td><td>Active - Updated Role</td><td>GRP_NURSES;GRP_NURSE_SUPERVISORS;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td></tr> <tr><td>1005</td><td>dsmith</td><td>David</td><td>Smith</td><td>Finance</td><td>Accountant</td><td>Nathalie Roy</td><td>Leaver</td><td>Disabled</td><td>Removed</td></tr> </table>
+<table> <colgroup><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/><col/></colgroup> <tr><th>EmployeeID</th><th>UserName</th><th>FirstName</th><th>LastName</th><th>Department</th><th>JobTitle</th><th>Manager</th><th>Action</th><th>Status</th><th>Groups</th><th>ValidationMessage</th></tr> <tr><td>1001</td><td>mtremblay</td><td>Marie</td><td>Tremblay</td><td>Nursing</td><td>Nurse</td><td>Claire Dubois</td><td>Joiner</td><td>Active</td><td>GRP_NURSES;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td><td>Account created and groups assigned from RBAC mapping</td></tr> <tr><td>1002</td><td>jdupont</td><td>Jean</td><td>Dupont</td><td>IT</td><td>IAM Analyst</td><td>Marc Fortin</td><td>Joiner</td><td>Active</td><td>GRP_IT_IAM;GRP_EMAIL_BASIC;GRP_ADMIN_TOOLS</td><td>Account created and groups assigned from RBAC mapping</td></tr> <tr><td>1003</td><td>abah</td><td>Amina</td><td>Bah</td><td>Laboratory</td><td>Lab Technician</td><td>Sophie Martin</td><td>Joiner</td><td>Active</td><td>GRP_LAB;GRP_EMAIL_BASIC;GRP_LAB_SYSTEM</td><td>Account created and groups assigned from RBAC mapping</td></tr> <tr><td>1004</td><td>pnguyen</td><td>Paul</td><td>Nguyen</td><td>Nursing</td><td>Head Nurse</td><td>Claire Dubois</td><td>Mover</td><td>Active - Updated Role</td><td>GRP_NURSES;GRP_NURSE_SUPERVISORS;GRP_EMAIL_BASIC;GRP_PATIENT_PORTAL</td><td>Role updated and access modified from RBAC mapping</td></tr> <tr><td>1005</td><td>dsmith</td><td>David</td><td>Smith</td><td>Finance</td><td>Accountant</td><td>Nathalie Roy</td><td>Leaver</td><td>Disabled</td><td>Removed</td><td>Account disabled and groups removed</td></tr> <tr><td>1006</td><td>smensah</td><td>Sarah</td><td>Mensah</td><td>Radiology</td><td>Radiology Technician</td><td>Claire Dubois</td><td>Joiner</td><td>Error</td><td>NO_GROUP_MAPPING_FOUND</td><td>No RBAC mapping found for job title: Radiology Technician</td></tr> <tr><td>1007</td><td>N/A</td><td>John</td><td>Doe</td><td>IT</td><td>IAM Analyst</td><td></td><td>Joiner</td><td>Validation Error</td><td>N/A</td><td>Missing Manager</td></tr> <tr><td>1008</td><td>N/A</td><td>Jane</td><td>Doe</td><td></td><td>Nurse</td><td>Claire Dubois</td><td>Joiner</td><td>Validation Error</td><td>N/A</td><td>Missing Department</td></tr> <tr><td>1009</td><td>N/A</td><td>Alex</td><td></td><td>IT</td><td>IAM Analyst</td><td>Marc Fortin</td><td>Joiner</td><td>Validation Error</td><td>N/A</td><td>Missing LastName</td></tr> </table>
 
 </body>
 </html>
