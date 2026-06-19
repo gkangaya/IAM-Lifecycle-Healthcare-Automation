@@ -1,0 +1,5 @@
+DNS: hospital.local
+HOSPITAL\Adminitrator
+psswd: Activate@2026
+
+DSRM_psswd: Activate!2026
