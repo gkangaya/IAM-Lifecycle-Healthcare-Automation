@@ -2,6 +2,7 @@
 # Phase 2.2 - Active Directory Integration
 
 Import-Module ActiveDirectory
+. "$PSScriptRoot\AD-AddGroups.ps1"
 
 $ProjectRoot = "C:\Projects\IAM-Lifecycle-Healthcare-Automation"
 
@@ -101,9 +102,7 @@ foreach ($Employee in $Employees) {
 
             $Groups = $RoleMatch.Groups -split ";"
 
-            foreach ($Group in $Groups) {
-                Add-ADGroupMember -Identity $Group -Members $UserName
-            }
+            Add-IAMUserToGroups -UserName $UserName -Groups $Groups
 
             Write-IAMAuditLog -EmployeeID $Employee.EmployeeID -UserName $UserName -Action "Joiner" -Status "Success" -Details "AD user created and groups assigned"
         }
@@ -126,9 +125,7 @@ foreach ($Employee in $Employees) {
 
     $Groups = $RoleMatch.Groups -split ";"
 
-    foreach ($Group in $Groups) {
-        Add-ADGroupMember -Identity $Group -Members $UserName -ErrorAction SilentlyContinue
-     }
+    Add-IAMUserToGroups -UserName $UserName -Groups $Groups
 
     Write-IAMAuditLog `
         -EmployeeID $Employee.EmployeeID `
