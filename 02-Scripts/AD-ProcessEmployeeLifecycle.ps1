@@ -3,6 +3,7 @@
 
 Import-Module ActiveDirectory
 . "$PSScriptRoot\AD-AddGroups.ps1"
+. "$PSScriptRoot\AD-CreateUser.ps1"
 
 $ProjectRoot = "C:\Projects\IAM-Lifecycle-Healthcare-Automation"
 
@@ -88,21 +89,18 @@ foreach ($Employee in $Employees) {
                 continue
             }
 
-            New-ADUser `
-                -Name "$($Employee.FirstName) $($Employee.LastName)" `
-                -GivenName $Employee.FirstName `
-                -Surname $Employee.LastName `
-                -SamAccountName $UserName `
-                -UserPrincipalName "$UserName@hospital.local" `
-                -Department $Employee.Department `
-                -Title $Employee.JobTitle `
-                -Path $EmployeeOU `
-                -AccountPassword (ConvertTo-SecureString "P@ssw0rd123!" -AsPlainText -Force) `
-                -Enabled $true
+            $UserName = New-IAMADUser `
+    -FirstName $Employee.FirstName `
+    -LastName $Employee.LastName `
+    -Department $Employee.Department `
+    -JobTitle $Employee.JobTitle `
+    -EmployeeOU $EmployeeOU
 
             $Groups = $RoleMatch.Groups -split ";"
 
-            Add-IAMUserToGroups -UserName $UserName -Groups $Groups
+            Add-IAMUserToGroups `
+    -UserName $UserName `
+    -Groups $Groups
 
             Write-IAMAuditLog -EmployeeID $Employee.EmployeeID -UserName $UserName -Action "Joiner" -Status "Success" -Details "AD user created and groups assigned"
         }
