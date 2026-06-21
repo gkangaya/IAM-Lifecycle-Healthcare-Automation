@@ -4,6 +4,8 @@
 Import-Module ActiveDirectory
 . "$PSScriptRoot\AD-AddGroups.ps1"
 . "$PSScriptRoot\AD-CreateUser.ps1"
+. "$PSScriptRoot\AD-DisableUser.ps1"
+. "$PSScriptRoot\AD-MoveUser.ps1"
 
 $ProjectRoot = "C:\Projects\IAM-Lifecycle-Healthcare-Automation"
 
@@ -114,16 +116,13 @@ foreach ($Employee in $Employees) {
         continue
     }
 
-    Remove-IAMRBACGroups -UserName $UserName
-
-    Set-ADUser `
-        -Identity $UserName `
-        -Department $Employee.Department `
-        -Title $Employee.JobTitle
-
     $Groups = $RoleMatch.Groups -split ";"
 
-    Add-IAMUserToGroups -UserName $UserName -Groups $Groups
+    Move-IAMUser `
+        -UserName $UserName `
+        -Department $Employee.Department `
+        -JobTitle $Employee.JobTitle `
+        -Groups $Groups
 
     Write-IAMAuditLog `
         -EmployeeID $Employee.EmployeeID `
@@ -134,20 +133,16 @@ foreach ($Employee in $Employees) {
 }
         "Leaver" {
 
-    $ExistingUser = Get-ADUser -Filter "SamAccountName -eq '$UserName'" -Properties DistinguishedName -ErrorAction SilentlyContinue
+    $ExistingUser = Get-ADUser -Filter "SamAccountName -eq '$UserName'" -ErrorAction SilentlyContinue
 
     if (-not $ExistingUser) {
         Write-IAMAuditLog -EmployeeID $Employee.EmployeeID -UserName $UserName -Action "Leaver" -Status "Error" -Details "User not found in Active Directory"
         continue
     }
 
-    Remove-IAMRBACGroups -UserName $UserName
-
-    Disable-ADAccount -Identity $UserName
-
-    Move-ADObject `
-        -Identity $ExistingUser.DistinguishedName `
-        -TargetPath $DisabledOU
+    Disable-IAMUser `
+        -UserName $UserName `
+        -DisabledOU $DisabledOU
 
     Write-IAMAuditLog `
         -EmployeeID $Employee.EmployeeID `
